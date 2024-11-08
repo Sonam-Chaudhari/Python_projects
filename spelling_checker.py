@@ -1,38 +1,42 @@
-#step1 importing the required library
+# Step 1: Importing the required library
 from spellchecker import SpellChecker
-from indexer import DictionaryIndex
-#step2 creating the app class
+
+# Step 2: Creating the app class
 class SpellCheckerApp:
     def __init__(self):
-        self.spell =SpellChecker()
+        self.spell = SpellChecker()
 
-    def correct_text(self,text):
-        words =text.split() #hello world ['hello','word']
-        corrected_words =[]
+    def correct_text(self, text):
+        words = text.split()  # Splitting the text into a list of words
+        corrected_words = []  # Initialize the list to store corrected words
 
         for word in words:
-            corrected_words =self.spell.correction(word)
-            if corrected_words != word.lower():
-                print(f'Correcting"{word}" to "{corrected_words}"')
-                corrected_words.append(corrected_words)
+            # Get the corrected word
+            corrected_word = self.spell.correction(word)
+            
+            if corrected_word != word.lower():  # Check if the word was corrected
+                print(f'Correcting "{word}" to "{corrected_word}"')
 
-        #step 4 returning the corrected text
-        return ''.join(corrected_words)
+            # Append the corrected word to the list
+            corrected_words.append(corrected_word)
+
+        # Step 4: Joining the list of corrected words into a single string and returning it
+        return ' '.join(corrected_words)  # Adding a space between corrected words
     
-     #step5 running the app where user will be providing the text and text get corrected and this will be put in loop where until user quits it will keep running
-     # Function in loop ( User --> Text --> Input)
+    # Step 5: Running the app, where the user will provide text, and the text gets corrected
     def run(self):
         print("\n---Spell Checker---")
 
         while True:
             text = input('Enter text to check (or type "exit" to quit):')
 
-            if text.lower() =='exit':
-                print('Clossing the program......')
+            if text.lower() == 'exit':
+                print('Closing the program...')
                 break
-            corrected_text =self.correct_text(text)
-            print(f'Corrected Text :{corrected_text}')
+            
+            corrected_text = self.correct_text(text)
+            print(f'Corrected Text: {corrected_text}')
 
-#step six running the main program
+# Step 6: Running the main program
 if __name__ == "__main__":
     SpellCheckerApp().run()
